@@ -1,0 +1,46 @@
+#!/bin/bash
+service=mysql
+service1=freeswitch
+service2=php
+service3=iptables
+
+echo "Time";date	
+if (( $(ps -ef | grep -v grep | grep $service | wc -l) > 0 ))
+then
+echo "$service is running fine!!!"
+elif (( $(ps -ef | grep -v grep | grep $service | wc -l) > 0 ))
+then
+echo "CRITICAL- mysql service stopped"
+else
+/etc/init.d/$service start
+fi
+
+if (( $(ps -ef | grep -v grep | grep $service1 | wc -l) > 0 ))
+then
+echo "$service1 is running fine!!!"
+elif (( $(ps -ef | grep -v grep | grep $service1 | wc -l) > 0 ))
+then
+echo "CRITICAL- freeswitch service stopped"
+else
+/etc/init.d/$service1 start
+fi
+
+if (( $(ps -ef | grep -v grep | grep $service2 | wc -l) > 0 ))
+then
+echo "$service2 is running fine !!!"
+elif (( $(ps -ef | grep -v grep | grep $service2 | wc -l) > 0 ))
+then
+echo "CRITICAL- php service stopped"
+else
+/etc/init.d/$service2 start
+fi
+
+if (( $(ps -ef | grep -v grep | grep $service3 | wc -l) > 0 ))
+then
+echo "$service3 is running fine !!!"
+elif (( $(ps -ef | grep -v grep | grep $service3 | wc -l) > 0 ))
+then
+echo "CRITICAL- iptables service stopped"
+else
+/etc/init.d/$service3 start
+fi
